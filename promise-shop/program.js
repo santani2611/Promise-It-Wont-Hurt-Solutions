@@ -66,12 +66,34 @@
  
  //EXcercise-6
 
-let promise1= Promise.resolve("I am God!")
+// let promise1= Promise.resolve("I am God!")
 
-let promise2=Promise.reject(new Error('I am the devil'));
+// let promise2=Promise.reject(new Error('I am the devil'));
 
-let promise3=new Promise((fulfil,reject)=>{
-  reject(new Error('Osho'));
-})
+// let promise3=new Promise((fulfil,reject)=>{
+//   reject(new Error('Osho'));
+// })
 
-promise3.catch(err=>console.log(err.message))
+// promise3.catch(err=>console.log(err.message))
+
+
+//Excercise-7
+
+//Promise followed by Promises.
+
+//abhi tak tumhare handlers then catch bas print kar rahi thi values /errors, kya karoge agar then/catch ko kuch asynchronous karna ho.
+
+first().then(x=>second(x).then(x=>console.log(x)));
+
+//second().then(x=>x)
+
+//promise2.then(x=>console.log(x));
+
+
+
+// let promise=new Promise((resolve,reject)=>{
+//   resolve(Promise.resolve("3"));
+//   reject(new Error("4"));
+// })
+
+// console.log(promise.then(x=>console.log(x)));
