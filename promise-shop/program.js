@@ -118,10 +118,29 @@
 // promise handlers will wrap your returned values in promises allowing
 // additional chaining.
 
-function attachTitle(x){
-  return `DR. ${x}`
-}
-Promise.resolve('MANHATTAN')
-.then(attachTitle)
-.then(console.log);
+// function attachTitle(x){
+//   return `DR. ${x}`
+// }
+// Promise.resolve('MANHATTAN')
+// .then(attachTitle)
+// .then(console.log);
 
+//EXcercise 9/13
+
+//kya hota hai jab ek error feka jata hai
+
+function parsePromised(data){
+
+return new Promise((fulfil,reject)=>{
+    try{
+        fulfil(JSON.parse(data));
+        throw reject(new Error("not parsed"));
+    }catch(e){
+        console.log(e.message);
+    }
+})
+
+
+}
+
+parsePromised(process.argv[2])
