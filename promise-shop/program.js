@@ -129,18 +129,105 @@
 
 //kya hota hai jab ek error feka jata hai
 
-function parsePromised(data){
+// function parsePromised(data){
 
-return new Promise((fulfil,reject)=>{
-    try{
-        fulfil(JSON.parse(data));
-        throw reject(new Error("not parsed"));
-    }catch(e){
-        console.log(e.message);
-    }
-})
+// return new Promise((fulfil,reject)=>{
+//     try{
+//         fulfil(JSON.parse(data));
+//         throw reject(new Error("not parsed"));
+//     }catch(e){
+//         console.log(e.message);
+//     }
+// })
 
 
-}
+// }
 
-parsePromised(process.argv[2])
+// parsePromised(process.argv[2])
+
+
+//Excercise 10/13
+
+
+// function alwaysThrows(){
+//     try{
+//         throw Promise.reject(new Error("OH NOES"));
+//     }catch(e){
+//       return e;
+//     }
+   
+// }
+// //alwaysThrows().then(null,e=>console.log(e.message));
+
+
+
+
+
+// let iterate=(x)=>{
+//     console.log(x);
+//     return ++x;
+// };
+
+// Promise.resolve(iterate(1))
+// .then(iterate)
+// .then(iterate)
+// .then(iterate)
+// .then(iterate)
+// .then(iterate)
+// .catch(alwaysThrows().catch(e=>console.log(e.message)))
+// .then(iterate)
+// .then(iterate)
+// .then(iterate)
+// .then(iterate)
+// .then(iterate)
+
+
+// let alwaysThrows=()=>
+//   {
+//    return new Promise((fulfil,reject)=>
+//     {
+//     reject(new Error("OH NOES"));
+//     }
+//     );
+//   }
+//   let onReject=(e)=>{
+//     console.log(e.message)
+//   }
+
+// let iterate=(x)=>{
+//     console.log(x);
+//     return x+1;
+// }
+
+// Promise.resolve(iterate(1))
+// .then(iterate)
+// .then(iterate)
+// .then(iterate)
+// .then(iterate)
+
+
+function iterate(num) {
+    console.log(num);
+    return num + 1;
+  }
+
+  function alwaysThrows() {
+    throw new Error('OH NOES');
+  }
+
+  function onReject(error) {
+    console.log(error.message);
+  }
+
+  Promise.resolve(iterate(1))
+  .then(iterate)
+  .then(iterate)
+  .then(iterate)
+  .then(iterate)
+  .then(alwaysThrows)
+  .then(iterate)
+  .then(iterate)
+  .then(iterate)
+  .then(iterate)
+  .then(iterate)
+  .catch(onReject);
