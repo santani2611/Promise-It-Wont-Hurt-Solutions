@@ -206,28 +206,79 @@
 // .then(iterate)
 
 
-function iterate(num) {
-    console.log(num);
-    return num + 1;
-  }
+// function iterate(num) {
+//     console.log(num);
+//     return num + 1;
+//   }
 
-  function alwaysThrows() {
-    throw new Error('OH NOES');
-  }
+//   function alwaysThrows() {
+//     throw new Error('OH NOES');
+//   }
 
-  function onReject(error) {
-    console.log(error.message);
-  }
+//   function onReject(error) {
+//     console.log(error.message);
+//   }
 
-  Promise.resolve(iterate(1))
-  .then(iterate)
-  .then(iterate)
-  .then(iterate)
-  .then(iterate)
-  .then(alwaysThrows)
-  .then(iterate)
-  .then(iterate)
-  .then(iterate)
-  .then(iterate)
-  .then(iterate)
-  .catch(onReject);
+//   Promise.resolve(iterate(1))
+//   .then(iterate)
+//   .then(iterate)
+//   .then(iterate)
+//   .then(iterate)
+//   .then(alwaysThrows)
+//   .then(iterate)
+//   .then(iterate)
+//   .then(iterate)
+//   .then(iterate)
+//   .then(iterate)
+//   .catch(onReject);
+
+
+//Excercise 11/13
+
+// Let’s build this function!
+
+// Create a function all that accepts two promises as arguments. This all
+// function should do all of the following:
+
+
+
+    function all(promise1,promise2){
+      let promise3=()=>{
+        return new Promise((resolve,reject)=>{
+        let counter=0;
+        let val1=promise1().then(counter++);
+        let val2=promise2().then(counter++);
+        if(counter==2){
+          resolve([val1,val2]);
+        }
+      });}
+    return promise3();
+    }
+   
+  all(getPromise1,getPromise2).then(v=>{
+    let ans=[];
+    function onFulfil(x){
+       ans.push(x);
+       if(ans.length==2)
+       console.log(ans);
+    }
+    v.forEach(item=>item.then(x=>onFulfil(x)))
+   // console.log(ans);
+  })
+
+// Create an internal promise in whatever way you see fit.
+
+// Create a counter variable with initial value of 0.
+
+// Attach then fulfillment handlers to both promises and increment the internal
+// counter when the handlers are called.
+
+// When the counter reaches 2, fulfill the internal promise with an array
+// containing both values.
+
+// Finally return that internal promise to the user.
+
+// After you finish writing your all function, pass getPromise1() and
+// getPromise2() into your new function and then attach console.log as a
+// fulfillment handler to the promise returned by your function. These two
+// promise-returning functions will be provided to you in the global scope.
