@@ -288,6 +288,48 @@
 //excercise -12
 
 
-var HTTP = require("q-io/http");
+// var HTTP = require("q-io/http");
 
-HTTP.read('http://localhost:1337').then(json=>JSON.parse(json)).then(val=>console.log(val)).catch(err=>console.log(err));
+// HTTP.read('http://localhost:1337').then(json=>JSON.parse(json)).then(val=>console.log(val)).catch(err=>console.log(err));
+
+
+//excercise-13
+
+// var http=require("q-io/http");
+// http.request(
+//   {
+//    method:'GET',
+//    url:"http://localhost:7000"
+//   }
+//    ).then(
+//    (id)=>{
+//     console.log(id);
+//       http.request(
+//       {
+//       method:"GET",
+//       url:`http://localhost:7001/${id.toString()}`
+//     })
+//     .then(json=>console.log(JSON.parse(json)))
+//   }
+//     ).
+//     catch(err=>console.log(err));
+
+// var HTTP = require("q-io/http")
+
+// HTTP.read('http://localhost:7000')
+// .then((response) => response.toString())
+// .then(response => {
+//   HTTP.read(`http://localhost:7001/${response}`)
+//   .then(JSON.parse)
+//   .then(console.log)
+// })
+
+var HTTP=require('q-io/http');
+
+HTTP.read('http://localhost:7000')
+.then((response)=>response.toString())
+.then(response=>{
+  HTTP.read(`http://localhost:7001/${response}`)
+  .then(JSON.parse)
+  .then(console.log)
+})
