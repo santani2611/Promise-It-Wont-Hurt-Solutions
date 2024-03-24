@@ -242,29 +242,29 @@
 
 
 
-    function all(promise1,promise2){
-      let promise3=()=>{
-        return new Promise((resolve,reject)=>{
-        let counter=0;
-        let val1=promise1().then(counter++);
-        let val2=promise2().then(counter++);
-        if(counter==2){
-          resolve([val1,val2]);
-        }
-      });}
-    return promise3();
-    }
+  //   function all(promise1,promise2){
+  //     let promise3=()=>{
+  //       return new Promise((resolve,reject)=>{
+  //       let counter=0;
+  //       let val1=promise1().then(counter++);
+  //       let val2=promise2().then(counter++);
+  //       if(counter==2){
+  //         resolve([val1,val2]);
+  //       }
+  //     });}
+  //   return promise3();
+  //   }
    
-  all(getPromise1,getPromise2).then(v=>{
-    let ans=[];
-    function onFulfil(x){
-       ans.push(x);
-       if(ans.length==2)
-       console.log(ans);
-    }
-    v.forEach(item=>item.then(x=>onFulfil(x)))
-   // console.log(ans);
-  })
+  // all(getPromise1,getPromise2).then(v=>{
+  //   let ans=[];
+  //   function onFulfil(x){
+  //      ans.push(x);
+  //      if(ans.length==2)
+  //      console.log(ans);
+  //   }
+  //   v.forEach(item=>item.then(x=>onFulfil(x)))
+  //  // console.log(ans);
+  // })
 
 // Create an internal promise in whatever way you see fit.
 
@@ -282,3 +282,12 @@
 // getPromise2() into your new function and then attach console.log as a
 // fulfillment handler to the promise returned by your function. These two
 // promise-returning functions will be provided to you in the global scope.
+
+
+
+//excercise -12
+
+
+var HTTP = require("q-io/http");
+
+HTTP.read('http://localhost:1337').then(json=>JSON.parse(json)).then(val=>console.log(val)).catch(err=>console.log(err));
